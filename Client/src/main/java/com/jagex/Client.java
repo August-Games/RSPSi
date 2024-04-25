@@ -892,21 +892,21 @@ public final class Client implements Runnable {
 			if (keyStatuses['w'] == 1) {
 				xCameraPos -= Constants.SINE[xCameraCurve] >> speedMultiplier;
 				yCameraPos += Constants.COSINE[xCameraCurve] >> speedMultiplier;
-				if (yCameraCurve < 0) {
-					zCameraPos -= Constants.SINE[-yCameraCurve] >> speedMultiplier;
-				} else {
-					zCameraPos += Constants.SINE[yCameraCurve] >> speedMultiplier;
-				}
+//				if (yCameraCurve < 0) {
+//					zCameraPos -= Constants.SINE[-yCameraCurve] >> speedMultiplier;
+//				} else {
+//					zCameraPos += Constants.SINE[yCameraCurve] >> speedMultiplier;
+//				}
 				this.cameraMoved = true;
 			} else if (keyStatuses['s'] == 1) {
 				xCameraPos += Constants.SINE[xCameraCurve] >> speedMultiplier;
 				yCameraPos -= Constants.COSINE[xCameraCurve] >> speedMultiplier;
 
-				if (yCameraCurve < 0) {
-					zCameraPos += Constants.SINE[-yCameraCurve] >> speedMultiplier;
-				} else {
-					zCameraPos -= Constants.SINE[yCameraCurve] >> speedMultiplier;
-				}
+//				if (yCameraCurve < 0) {
+//					zCameraPos += Constants.SINE[-yCameraCurve] >> speedMultiplier;
+//				} else {
+//					zCameraPos -= Constants.SINE[yCameraCurve] >> speedMultiplier;
+//				}
 
 				this.cameraMoved = true;
 			} 

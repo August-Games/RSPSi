@@ -81,12 +81,12 @@ public class GameKeyListener implements EventHandler<InputEvent> {
 				event.consume();//Prevents tabs switching
 			}
 			
-			if(keyEvent.getCode() == KeyCode.PAGE_UP) {
+			if(keyEvent.getCode() == KeyCode.PAGE_UP || keyEvent.getCode() == KeyCode.O) {
 				client.keyStatuses['o'] = event.getEventType() == KeyEvent.KEY_RELEASED ? 0 : 1;
 				
 				event.consume();
 			}
-			if(keyEvent.getCode() == KeyCode.PAGE_DOWN) {
+			if(keyEvent.getCode() == KeyCode.PAGE_DOWN || keyEvent.getCode() == KeyCode.P) {
 				client.keyStatuses['p'] = event.getEventType() == KeyEvent.KEY_RELEASED ? 0 : 1;
 				
 				event.consume();

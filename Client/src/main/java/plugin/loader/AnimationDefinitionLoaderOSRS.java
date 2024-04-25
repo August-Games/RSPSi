@@ -21,10 +21,8 @@ public class AnimationDefinitionLoaderOSRS extends AnimationDefinitionLoader {
 		this.rev220FrameSounds = archive.getRevision() > REV_220_SEQ_ARCHIVE_REV;
 		val highestId = Arrays.stream(archive.fileIds()).max().getAsInt();
 		animations = new Animation[highestId + 1];
-		System.err.println("Highest ID: " + highestId);
 		for(File file : archive.files()) {
 			if(file != null && file.getData() != null) {
-				System.err.println("anim: " + file.getId());
 				animations[file.getId()] = decode(new Buffer(file.getData()));
 			}
 		}
@@ -49,7 +47,6 @@ public class AnimationDefinitionLoaderOSRS extends AnimationDefinitionLoader {
 		Animation animation = new Animation();
 		do {
 			int opcode = buffer.readUByte();
-			System.err.println("Opcode: " + opcode);
 			if (opcode == 0) {
 				break;
 			}
