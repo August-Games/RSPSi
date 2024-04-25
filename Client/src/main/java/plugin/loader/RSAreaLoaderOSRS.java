@@ -1,17 +1,16 @@
-package com.rspsi.plugin.loader;
+package plugin.loader;
 
 import com.displee.cache.index.archive.Archive;
 import com.displee.cache.index.archive.file.File;
-
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.stream.IntStream;
-
 import com.jagex.cache.def.RSArea;
 import com.jagex.cache.loader.config.RSAreaLoader;
 import com.jagex.io.Buffer;
 import com.jagex.util.ByteBufferUtils;
 import lombok.val;
+
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class RSAreaLoaderOSRS extends RSAreaLoader {
 

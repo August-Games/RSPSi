@@ -1,7 +1,6 @@
-package com.rspsi.plugin;
+package plugin;
 
 import com.displee.cache.index.Index;
-
 import com.jagex.Client;
 import com.jagex.cache.loader.anim.AnimationDefinitionLoader;
 import com.jagex.cache.loader.anim.FrameBaseLoader;
@@ -15,17 +14,8 @@ import com.jagex.cache.loader.object.ObjectDefinitionLoader;
 import com.jagex.cache.loader.textures.TextureLoader;
 import com.jagex.net.ResourceResponse;
 import com.rspsi.cache.CacheFileType;
-import com.rspsi.plugin.loader.AnimationDefinitionLoaderOSRS;
-import com.rspsi.plugin.loader.FloorDefinitionLoaderOSRS;
-import com.rspsi.plugin.loader.FrameBaseLoaderOSRS;
-import com.rspsi.plugin.loader.FrameLoaderOSRS;
-import com.rspsi.plugin.loader.GraphicLoaderOSRS;
-import com.rspsi.plugin.loader.MapIndexLoaderOSRS;
-import com.rspsi.plugin.loader.ObjectDefinitionLoaderOSRS;
-import com.rspsi.plugin.loader.RSAreaLoaderOSRS;
-import com.rspsi.plugin.loader.TextureLoaderOSRS;
-import com.rspsi.plugin.loader.VarbitLoaderOSRS;
 import com.rspsi.plugins.core.ClientPlugin;
+import plugin.loader.*;
 
 public class OSRSPlugin implements ClientPlugin {
 

@@ -1,6 +1,4 @@
-package com.rspsi.plugin.loader;
-
-import org.major.cache.anim.FrameConstants;
+package plugin.loader;
 
 import com.jagex.Client;
 import com.jagex.cache.anim.Frame;
@@ -9,6 +7,7 @@ import com.jagex.cache.loader.anim.FrameBaseLoader;
 import com.jagex.cache.loader.anim.FrameLoader;
 import com.jagex.io.Buffer;
 import com.rspsi.cache.CacheFileType;
+import org.major.cache.anim.FrameConstants;
 
 public class FrameLoaderOSRS extends FrameLoader {
 

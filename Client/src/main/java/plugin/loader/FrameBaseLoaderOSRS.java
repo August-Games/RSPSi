@@ -1,14 +1,13 @@
-package com.rspsi.plugin.loader;
+package plugin.loader;
 
 import com.displee.cache.index.Index;
 import com.displee.cache.index.archive.Archive;
-
-import java.util.Map;
-
 import com.google.common.collect.Maps;
 import com.jagex.cache.anim.FrameBase;
 import com.jagex.cache.loader.anim.FrameBaseLoader;
 import com.jagex.io.Buffer;
+
+import java.util.Map;
 
 public class FrameBaseLoaderOSRS extends FrameBaseLoader {
 	

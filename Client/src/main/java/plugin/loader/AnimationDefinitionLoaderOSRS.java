@@ -1,34 +1,33 @@
-package com.rspsi.plugin.loader;
+package plugin.loader;
 
 import com.displee.cache.index.archive.Archive;
 import com.displee.cache.index.archive.file.File;
-
-import java.util.Arrays;
-import java.util.List;
-
-import lombok.val;
-import org.apache.commons.compress.utils.Lists;
-
 import com.jagex.cache.anim.Animation;
 import com.jagex.cache.loader.anim.AnimationDefinitionLoader;
 import com.jagex.io.Buffer;
+import lombok.val;
+
+import java.util.Arrays;
 
 public class AnimationDefinitionLoaderOSRS extends AnimationDefinitionLoader {
 
-
 	private int count;
 	private Animation[] animations;
-	
+	public static final int REV_220_SEQ_ARCHIVE_REV = 1141;
+	private boolean rev220FrameSounds = true;
+
 	@Override
 	public void init(Archive archive) {
+		this.rev220FrameSounds = archive.getRevision() > REV_220_SEQ_ARCHIVE_REV;
 		val highestId = Arrays.stream(archive.fileIds()).max().getAsInt();
 		animations = new Animation[highestId + 1];
+		System.err.println("Highest ID: " + highestId);
 		for(File file : archive.files()) {
 			if(file != null && file.getData() != null) {
+				System.err.println("anim: " + file.getId());
 				animations[file.getId()] = decode(new Buffer(file.getData()));
 			}
 		}
-		
 	}
 
 	@Override
@@ -50,6 +49,7 @@ public class AnimationDefinitionLoaderOSRS extends AnimationDefinitionLoader {
 		Animation animation = new Animation();
 		do {
 			int opcode = buffer.readUByte();
+			System.err.println("Opcode: " + opcode);
 			if (opcode == 0) {
 				break;
 			}
@@ -118,14 +118,19 @@ public class AnimationDefinitionLoaderOSRS extends AnimationDefinitionLoader {
 				int len = buffer.readUByte();
 
 				for (int i = 0; i < len; i++) {
-					buffer.skip(3);
+					if (rev220FrameSounds) buffer.skip(5);
+					else buffer.skip(4);
 				}
 			
 			} else if (opcode == 14) {
-				buffer.skip(4);
+				buffer.skip(2);
 			} else if (opcode == 15) {
 				int count = buffer.readUShort();
-				buffer.skip(count * 5);
+				for (int i = 0; i < count; i++) {
+					buffer.skip(2);
+					if (rev220FrameSounds) buffer.skip(5);
+					else buffer.skip(3);
+				}
 			} else if (opcode == 16) {
 				buffer.skip(4);
 			} else if (opcode == 17) {

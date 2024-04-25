@@ -1,32 +1,32 @@
-package com.rspsi.plugin.loader;
+package plugin.loader;
 
-import com.jagex.cache.def.RSArea;
 import com.displee.cache.index.archive.Archive;
 import com.displee.cache.index.archive.file.File;
-
-import java.util.Arrays;
-import java.util.Map;
-
 import com.google.common.collect.Maps;
 import com.jagex.Client;
 import com.jagex.cache.config.VariableBits;
 import com.jagex.cache.def.ObjectDefinition;
+import com.jagex.cache.def.RSArea;
 import com.jagex.cache.loader.config.VariableBitLoader;
 import com.jagex.cache.loader.object.ObjectDefinitionLoader;
 import com.jagex.io.Buffer;
-
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+
+import java.util.Arrays;
+import java.util.Map;
 
 @Slf4j
 public class ObjectDefinitionLoaderOSRS extends ObjectDefinitionLoader {
 
 	private int count;
 	private Map<Integer, ObjectDefinition> cache = Maps.newConcurrentMap();
-
+	public static final int REV_220_OBJ_ARCHIVE_REV = 1673;
+	private boolean rev220SoundData = true;
 
 	@Override
 	public void init(Archive archive) {
+		this.rev220SoundData = archive.getRevision() >= REV_220_OBJ_ARCHIVE_REV;
 		val highestId = Arrays.stream(archive.fileIds()).max().getAsInt();
 		count = highestId + 1;
 		for(File file : archive.files()){
@@ -217,11 +217,15 @@ public class ObjectDefinitionLoaderOSRS extends ObjectDefinitionLoader {
 				definition.setMorphisms(morphisms);
 				definition.setVarbit(varbit);
 				definition.setVarp(varp);
-			} else if (opcode == 78) {//TODO Figure out what these do in OSRS
-				//First short = ambient sound
-				buffer.skip(3);
+			} else if (opcode == 78) {
+				buffer.skip(2); // ambient sound ID
+				buffer.skip(1); // ambient sound distance
+				if (rev220SoundData) buffer.skip(1); // ambient sound retain
 			} else if (opcode == 79) {
-				buffer.skip(5);
+				buffer.skip(2); // Ambient sound change ticks min
+				buffer.skip(2); // Ambient sound change ticks max
+				buffer.skip(1); // Ambient sound distance
+				if (rev220SoundData) buffer.skip(1); // ambient sound retain
 				int count = buffer.readUByte();
 				buffer.skip(2 * count);
 			} else if (opcode == 81) {
@@ -294,7 +298,7 @@ public class ObjectDefinitionLoaderOSRS extends ObjectDefinitionLoader {
 		} else {
 			var2 = def.getMorphisms()[def.getMorphisms().length - 1];
 		}
-		return var2 == -1 ? null : ObjectDefinitionLoader.lookup(var2);
+		return var2 == -1 ? null : lookup(var2);
 	}
 
 

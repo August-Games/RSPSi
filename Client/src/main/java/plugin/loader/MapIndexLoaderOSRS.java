@@ -1,20 +1,18 @@
-package com.rspsi.plugin.loader;
+package plugin.loader;
 
 import com.displee.cache.index.Index;
 import com.displee.cache.index.archive.Archive;
+import com.displee.cache.index.archive.file.File;
+import com.jagex.cache.loader.map.MapIndexLoader;
+import com.jagex.cache.loader.map.MapType;
+import com.jagex.io.Buffer;
+import com.rspsi.core.misc.RegionData;
+import org.apache.commons.compress.utils.Lists;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
-
-import com.displee.cache.index.archive.file.File;
-import org.apache.commons.compress.utils.Lists;
-
-import com.jagex.cache.loader.map.MapIndexLoader;
-import com.jagex.cache.loader.map.MapType;
-import com.jagex.io.Buffer;
-import com.rspsi.core.misc.RegionData;
 
 public class MapIndexLoaderOSRS extends MapIndexLoader {
 	

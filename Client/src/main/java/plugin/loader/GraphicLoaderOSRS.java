@@ -1,8 +1,7 @@
-package com.rspsi.plugin.loader;
+package plugin.loader;
 
 import com.displee.cache.index.archive.Archive;
 import com.displee.cache.index.archive.file.File;
-
 import com.jagex.cache.anim.Graphic;
 import com.jagex.cache.loader.anim.AnimationDefinitionLoader;
 import com.jagex.cache.loader.anim.GraphicLoader;

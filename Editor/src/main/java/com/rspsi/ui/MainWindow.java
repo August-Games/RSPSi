@@ -61,7 +61,6 @@ import com.rspsi.core.misc.ToolType;
 import com.rspsi.core.misc.XTEAManager;
 import com.rspsi.options.Config;
 import com.rspsi.options.Options;
-import com.rspsi.plugins.ui.ApplicationPluginLoader;
 import com.rspsi.resources.ResourceLoader;
 import com.rspsi.swatches.BaseSwatch;
 import com.rspsi.swatches.OverlaySwatch;
@@ -689,7 +688,6 @@ public class MainWindow extends Application {
 
 
 
-			ApplicationPluginLoader.loadPlugins(this);
 			ChangeListenerUtil.addListener(() -> {
 				if(Client.gameLoaded.get()) {
 					underlaySwatch.clear();

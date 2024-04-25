@@ -3,6 +3,7 @@
 bin/
 build/
 out/
+cache/
 /gradlew.bat
 /gradlew
 

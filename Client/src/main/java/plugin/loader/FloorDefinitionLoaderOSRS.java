@@ -1,17 +1,14 @@
-package com.rspsi.plugin.loader;
+package plugin.loader;
 
 import com.displee.cache.index.archive.Archive;
 import com.displee.cache.index.archive.file.File;
-
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.Map;
-
-import com.google.common.collect.Maps;
 import com.jagex.cache.def.Floor;
 import com.jagex.cache.loader.floor.FloorDefinitionLoader;
 import com.jagex.cache.loader.floor.FloorType;
 import lombok.val;
+
+import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 public class FloorDefinitionLoaderOSRS extends FloorDefinitionLoader {
 
