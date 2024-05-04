@@ -92,6 +92,26 @@ public class GameKeyListener implements EventHandler<InputEvent> {
 				event.consume();
 			}
 
+			if(keyEvent.getCode() == KeyCode.EQUALS) {
+				if (event.getEventType() == KeyEvent.KEY_PRESSED) {
+					client.keyStatuses['='] = 1;
+					event.consume();
+				} else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
+					client.keyStatuses['='] = -1;
+					event.consume();
+				}
+			}
+
+			if(keyEvent.getCode() == KeyCode.MINUS) {
+				if (event.getEventType() == KeyEvent.KEY_PRESSED) {
+					client.keyStatuses['-'] = 1;
+					event.consume();
+				} else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
+					client.keyStatuses['-'] = -1;
+					event.consume();
+				}
+			}
+
 			if(keyEvent.isControlDown() && keyEvent.isAltDown() && keyEvent.getCode() == KeyCode.R) {
 				Settings.resetSettings();
 				System.exit(0);

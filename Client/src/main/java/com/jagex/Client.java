@@ -22,6 +22,7 @@ import java.util.function.Consumer;
 
 import javax.imageio.ImageIO;
 
+import lombok.val;
 import org.displee.util.GZIPUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -869,7 +870,9 @@ public final class Client implements Runnable {
 			client.keyStatuses['w'] = 0;
 		}, System.currentTimeMillis() + 120);
 	}
-	
+
+	private boolean incHeightDisabled = false;
+	private boolean decHeightDisabled = false;
 	public final void handleKeyInputs(int speedMultiplier) {
 		try {
 			int j = 0 + anInt1278;
@@ -887,7 +890,32 @@ public final class Client implements Runnable {
 			if (anInt1015 != k) {
 				anInt1015 += (k - anInt1015) / 16;
 			}
-			
+
+			if (keyStatuses['='] == 1 && !incHeightDisabled) {
+				System.err.println("inc, disable = true");
+				incHeightDisabled = true;
+				sceneGraph.getSelectedTiles()
+					.forEach(tile -> {
+						int current = mapRegion.tileHeights[tile.plane][tile.positionX][tile.positionY];
+						mapRegion.tileHeights[tile.plane][tile.positionX][tile.positionY] = (short) (current - 4);
+					});
+			} else if (keyStatuses['-'] == 1 && !decHeightDisabled) {
+				System.err.println("dec, disable = true");
+				decHeightDisabled = true;
+				sceneGraph.getSelectedTiles()
+					.forEach(tile -> {
+						int current = mapRegion.tileHeights[tile.plane][tile.positionX][tile.positionY];
+						mapRegion.tileHeights[tile.plane][tile.positionX][tile.positionY] = (short) (current + 4);
+					});
+			}
+
+			if (keyStatuses['='] == -1 && incHeightDisabled) {
+				incHeightDisabled = false;
+				System.err.println("inc, disable = false");
+			} else if (keyStatuses['-'] == -1 && decHeightDisabled) {
+				System.err.println("dec, disable = false");
+				decHeightDisabled = false;
+			}
 
 			if (keyStatuses['w'] == 1) {
 				xCameraPos -= Constants.SINE[xCameraCurve] >> speedMultiplier;
